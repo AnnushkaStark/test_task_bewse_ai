@@ -1,4 +1,5 @@
 from typing import List
+from uuid import UUID
 
 from pydantic import BaseModel, Field
 
@@ -26,6 +27,7 @@ class ApplicationCreateDB(ApplicationCreate):
 
 
 class ApplicationResponse(ApplicationCreate):
+    uid: UUID
     author: UserResponse
 
 

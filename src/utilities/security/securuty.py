@@ -27,3 +27,7 @@ async def create_tokens(subject: TokenSubject) -> TokenAccessRefresh:
         refresh_token=refresh_token,
         token_type="bearer",
     )
+
+
+ACCESS_TOKEN_COOKIE_KEY = jwt_settings.ACCESS_TOKEN_COOKIE_KEY
+REFRESH_TOKEN_COOKIE_KEY = jwt_settings.REFRESH_TOKEN_COOKIE_KEY

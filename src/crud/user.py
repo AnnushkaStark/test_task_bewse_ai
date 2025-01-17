@@ -4,12 +4,12 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from models import User
-from schemas.user import UserBase, UserCreateDB
+from schemas.user import UserBase
 
 from .async_crud import BaseAsyncCRUD
 
 
-class UserCRUD(BaseAsyncCRUD[User, UserBase, UserCreateDB]):
+class UserCRUD(BaseAsyncCRUD[User, UserBase]):
     async def get_by_username(
         self, db: AsyncSession, username: str
     ) -> Optional[User]:

@@ -6,14 +6,12 @@ from sqlalchemy.future import select
 from sqlalchemy.orm import joinedload
 
 from models import Application, User
-from schemas.application import ApplicationBase, ApplicationCreateDB
+from schemas.application import ApplicationBase
 
 from .async_crud import BaseAsyncCRUD
 
 
-class ApplicationCRUD(
-    BaseAsyncCRUD[Application, ApplicationBase, ApplicationCreateDB]
-):
+class ApplicationCRUD(BaseAsyncCRUD[Application, ApplicationBase]):
     async def get_by_uid(
         self, db: AsyncSession, uid: UUID
     ) -> Optional[Application]:

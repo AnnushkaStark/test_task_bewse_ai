@@ -30,7 +30,7 @@ async def create_user(
     user: UserCreate, db: AsyncSession = Depends(get_async_db)
 ) -> User:
     try:
-        return await user_service.create(db=db, create_data=user)
+        return await user_service.create(db=db, create_schema=user)
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail=str(e)

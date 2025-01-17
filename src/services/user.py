@@ -14,11 +14,13 @@ async def create(db: AsyncSession, create_schema: UserCreate) -> User:
     if exsisted_username := await user_crud.get_by_username(
         db=db, username=create_schema.username
     ):
-        raise Exception(f"Username {exsisted_username} alredy exsists!")
+        raise Exception(
+            f"Username {exsisted_username.username} alredy exsists!"
+        )
     if exsisted_email := await user_crud.get_by_email(
         db=db, email=create_schema.email
     ):
-        raise Exception(f"Email {exsisted_email}  alredy exsists!")
+        raise Exception(f"Email {exsisted_email.email}  alredy exsists!")
     if create_schema.password != create_schema.password_confirm:
         raise Exception("Passwords don't match!")
     del create_schema.password_confirm

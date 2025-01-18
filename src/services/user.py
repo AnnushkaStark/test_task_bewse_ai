@@ -29,7 +29,7 @@ async def create(db: AsyncSession, create_schema: UserCreate) -> User:
     return await user_crud.create(db=db, create_schema=create_data)
 
 
-async def login(db: AsyncSession, db_obj: User, login_data: UserLogin) -> dict:
+async def login(db_obj: User, login_data: UserLogin) -> dict:
     if verify_password(
         plain_password=login_data.password,
         hashed_password=db_obj.password,

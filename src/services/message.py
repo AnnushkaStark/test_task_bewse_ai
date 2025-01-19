@@ -10,4 +10,7 @@ async def send_message(author: User, application: Application) -> None:
         description=application.description,
         created_at=application.created_at,
     )
-    await send_application(application_data=message_schema.model_dump())
+    try:
+        await send_application(application_data=message_schema.model_dump())
+    except Exception as e:
+        raise Exception(str(e))

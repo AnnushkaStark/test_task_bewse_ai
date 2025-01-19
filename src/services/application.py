@@ -15,5 +15,10 @@ async def create(
     application = await application_crud.create(
         db=db, create_schema=create_data
     )
-    # await message_service.send_message(author=author, application=application)
+    try:
+        await message_service.send_message(
+            author=author, application=application
+        )
+    except Exception as e:
+        raise Exception(str(e))
     return application

@@ -1,6 +1,6 @@
+from broker import send_application
 from models import Application, User
 from schemas.kafka_message import KafkaMessageBase
-from src.broker import send_application
 
 
 async def send_message(author: User, application: Application) -> None:

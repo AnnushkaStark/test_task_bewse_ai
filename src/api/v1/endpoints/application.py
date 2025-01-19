@@ -44,7 +44,7 @@ async def search_applications(
     db: AsyncSession = Depends(get_async_db),
     current_user: User = Depends(get_current_user),
 ):
-    return await search_application_crud.get_applications_result(
+    return await search_application_crud.get_search_applications_result(
         db=db, skip=skip, limit=limit, query=query
     )
 

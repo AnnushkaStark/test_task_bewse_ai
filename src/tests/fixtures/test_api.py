@@ -20,6 +20,7 @@ async def user_fixture(async_session: AsyncSession) -> User:
     return user
 
 
+@pytest_asyncio.fixture
 async def another_user_fixture(async_session: AsyncSession) -> User:
     user = User(
         username="AnotherUser",
@@ -37,7 +38,7 @@ async def application_fixture(
     async_session: AsyncSession, user_fixture: User
 ) -> Application:
     application = Application(
-        dascription="My test description", author_id=user_fixture.id
+        description="Test description", author_id=user_fixture.id
     )
     async_session.add(application)
     await async_session.commit()
@@ -50,7 +51,7 @@ async def another_application_fixture(
     async_session: AsyncSession, another_user_fixture: User
 ) -> Application:
     application = Application(
-        dascription="My another test description",
+        description="Another test description",
         created_at=(datetime.now() + timedelta(days=1)),
         author_id=another_user_fixture.id,
     )

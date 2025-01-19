@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from crud.application import application_crud
 from models import Application, User
 from schemas.application import ApplicationCreate, ApplicationCreateDB
-from services import broker as broker_service
+from services import message as message_service
 
 
 async def create(
@@ -15,5 +15,5 @@ async def create(
     application = await application_crud.create(
         db=db, create_schema=create_data
     )
-    await broker_service.send_message(author=author, application=application)
+    # await message_service.send_message(author=author, application=application)
     return application

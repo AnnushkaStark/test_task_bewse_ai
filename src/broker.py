@@ -3,6 +3,7 @@ import logging
 
 from aiokafka import AIOKafkaProducer
 
+from config.configs import kafka_settings
 from constants.kafka import KAFKA_TOPIC
 
 logging.basicConfig(level=logging.INFO)
@@ -12,7 +13,7 @@ logger = logging.getLogger(__name__)
 async def send_application(application_data: dict) -> None:
     topic = KAFKA_TOPIC
     async with AIOKafkaProducer(
-        bootstrap_servers="localhost:9092", retry_backoff_ms=5
+        bootstrap_servers=kafka_settings.BOOTSTAP_URL, retry_backoff_ms=5
     ) as producer:
         try:
             logger.info(f"Sending message to topic: {topic}")

@@ -22,5 +22,10 @@ class JWTSettings(BaseSetting):
     REFRESH_TOKEN_COOKIE_KEY: str
 
 
+class KafkaSettrings(BaseSetting):
+    BOOTSTAP_URL: str
+
+
+kafka_settings = KafkaSettrings()
 db_settings = DBSettings()
 jwt_settings = JWTSettings()

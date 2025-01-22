@@ -264,3 +264,145 @@ RESPONSE
   ]
 }
 ```
+
+## Запуск проекта
+
+1. Запуск без тестов
+
+* Создать в корневой диретории файл .env для переменных окружения
+
+```
+#=====POSTGRESS_SETTINGS=====#
+
+POSTGRES_HOST=localhost
+POSTGRES_DB=db
+POSTGRES_PORT=5432
+POSTGRES_USER=admin
+POSTGRES_PASSWORD=postgres
+
+
+#=====JWT_SETTINGS=====#
+
+JWT_ACCESS_TOKEN_EXPIRES=30
+JWT_ALGORITHM=HS256
+JWT_SECRET_KEY=my_secret_key
+JWT_REFRESH_SECRET_KEY=my_refresh_secret_key
+JWT_REFRESH_TOKEN_EXPIRES=10080
+ACCESS_TOKEN_COOKIE_KEY=access_token_cookie
+REFRESH_TOKEN_COOKIE_KEY=refresh_token_cookie
+
+
+#=====KAFKA=====#
+
+BOOTSTAP_URL=kafka:29092
+
+```
+
+* В корневой директории проекта выполнить команду
+
+```
+docker-compose up --build
+```
+
+* Сваггер будет доступен по адресу
+
+```
+http://127.0.0.1:8000/application_service/docs#/
+```
+
+
+2. Запуск проекта с тестами
+
+Важно - при запуске контейнов в фоне изменить в файле .env переменную
+
+```
+BOOTSTAP_URL=kafka:29092
+```
+
+на
+
+```
+BOOTSTAP_URL=localhost:9092
+```
+
+перед запуском полностью в докер вернуть изменения к начальному варианту
+
+* Удалить все из папки versions в alembic
+
+* Создать виртуальное окружение
+
+Для windows
+
+```
+python -m venv venv
+```
+
+Для Linux
+
+```
+python3.11 -m venv venv
+```
+
+* Активировать виртуальное окружение
+
+Для windows
+
+```
+venv/Scripts/activate.ps1
+```
+
+Для Linux
+
+```
+source venv/bin/activate
+```
+
+* Установить зависимости
+
+```
+pip install -r requirements.txt
+```
+
+* Запустить контейнеры в фоновом режиме
+
+```
+docker-compose up --build -d
+```
+
+* Сменить директорию на диреторию проекта
+
+```
+cd src
+```
+
+* Запустить тесты командой
+
+```
+pytest
+```
+
+* Сдедать миграцию
+
+```
+alembic revision --autogenerate -m "ctreate all"
+```
+
+* Применить миграцию
+
+```
+alembic upgrade head
+```
+
+* Вернуться в корневую директорию
+
+```
+cd ..
+```
+
+* Опустить контейнеры
+
+```
+docker-compose down
+```
+
+* Запустить проект полностью в докер (см п1)

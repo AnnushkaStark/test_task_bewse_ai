@@ -17,4 +17,4 @@ COPY . /app
 
 WORKDIR /app/src
 
-CMD  ["sh", "-c", "alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 5000"]
+CMD  ["sh", "-c", "alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8000"]
